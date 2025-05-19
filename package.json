@@ -1,0 +1,12 @@
+{
+  "name": "sequelize-model",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
