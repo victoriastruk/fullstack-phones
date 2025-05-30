@@ -1,0 +1,50 @@
+### 201
+POST http://localhost:5000/api/phones/
+Content-Type: application/json
+
+{
+   "model": "Galaxy S21",
+   "brand": "Samsung",
+   "year": 2021,
+   "ram": 8,
+   "cpu": "Exynos 2100",
+   "screen_size": 6.2,
+   "has_nfc": true
+}
+
+### 200
+GET http://localhost:5000/api/phones?page=2&results=3
+
+### 200
+
+GET http://localhost:5000/api/phones/6
+
+### 404
+
+GET http://localhost:5000/api/phones/123
+
+###
+
+PATCH http://localhost:5000/api/phones/7
+Content-Type: application/json
+
+{
+   "brand": "Apple"
+}
+
+### 404
+
+PATCH http://localhost:5000/api/phones/123
+Content-Type: application/json
+
+{
+   "cpu": "Exynos 2100"
+}
+
+### 200
+
+DELETE http://localhost:5000/api/phones/6
+
+### 404
+
+DELETE http://localhost:5000/api/phones/123
