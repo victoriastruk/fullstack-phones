@@ -2,13 +2,10 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Phone extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      Phone.belongsTo(models.Cpu, {
+        foreignKey: 'cpu_id',
+      });
     }
   }
   Phone.init(
@@ -44,13 +41,6 @@ module.exports = (sequelize, DataTypes) => {
           min: 1,
         },
       },
-      cpu: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
       screen_size: {
         type: DataTypes.FLOAT,
         allowNull: false,
@@ -68,6 +58,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Phone',
+      underscored: true,
     }
   );
   return Phone;

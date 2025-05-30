@@ -1,0 +1,27 @@
+GET http://localhost:5000/api/cpus/2/phones
+
+### 201
+POST http://localhost:5000/api/cpus/1/phones
+Content-Type: application/json
+
+{
+  "model": "Galaxy S23",
+  "brand": "Samsung",
+  "year": 2023,
+  "ram": 8,
+  "screen_size": 6.1,
+  "has_nfc": true
+}
+
+### 404
+POST http://localhost:5000/api/cpus/88/phones
+Content-Type: application/json
+
+{
+  "model": "Galaxy S23",
+  "brand": "Samsung",
+  "year": 2023,
+  "ram": 8,
+  "screen_size": 6.1,
+  "has_nfc": true
+}
