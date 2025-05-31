@@ -54,6 +54,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: false,
       },
+      image: DataTypes.STRING,
     },
     {
       sequelize,

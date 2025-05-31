@@ -93,3 +93,27 @@ module.exports.deletePhone = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.updatePhoneImage = async (req, res, next) => {
+  const { id } = req.params;
+  const filename = req.file?.filename;
+
+  if (!filename) {
+    return next(createHttpError(422, 'Image is required'));
+  }
+
+  try {
+    const [updatedPhonesCount, [updatedPhone]] = await Phone.update(
+      { image: filename },
+      { where: { id }, returning: true }
+    );
+
+    if (!updatedPhonesCount) {
+      return next(createHttpError(404, 'Phone Not Found'));
+    }
+
+    res.status(200).send({ data: updatedPhone });
+  } catch (err) {
+    next(err);
+  }
+};
