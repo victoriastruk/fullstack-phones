@@ -1,5 +1,5 @@
 const createHttpError = require('http-errors');
-const { Phone, Cpu } = require('../models');
+const { Phone, Cpu } = require('../db/models');
 
 module.exports.getPhonesByCpu = async (req, res, next) => {
   try {
