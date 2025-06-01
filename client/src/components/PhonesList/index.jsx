@@ -1,10 +1,13 @@
 import { useEffect } from "react";
 import BeatLoader from "react-spinners/BeatLoader";
 import { connect } from "react-redux";
-import { getPhonesThunk } from "../../store/slices/phonesSlice";
+import {
+  deletePhoneThunk,
+  getPhonesThunk,
+} from "../../store/slices/phonesSlice";
 import defImage from "./defaultPhoto.png";
 
-function PhonesList({ phones, isFetching, error, getPhones }) {
+function PhonesList({ phones, isFetching, error, getPhones, deletePhone }) {
   useEffect(() => {
     getPhones();
   }, []);
@@ -23,6 +26,7 @@ function PhonesList({ phones, isFetching, error, getPhones }) {
               alt={`${u.firstName} ${u.lastName}`}
             />
             <p>{JSON.stringify(u)}</p>
+            <button onClick={() => deletePhone(u.id)}>X</button>
           </li>
         ))}
       </ul>
@@ -34,5 +38,6 @@ const mapStateToProps = ({ phonesData }) => phonesData;
 
 const mapDispatchToProps = (dispatch) => ({
   getPhones: () => dispatch(getPhonesThunk()),
+  deletePhone: (id) => dispatch(deletePhoneThunk(id)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(PhonesList);

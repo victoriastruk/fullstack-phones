@@ -7,7 +7,7 @@ Content-Type: application/json
    "brand": "Samsung",
    "year": 2021,
    "ram": 8,
-   "cpu": "Exynos 2100",
+   "cpu_id": 1,
    "screen_size": 6.2,
    "has_nfc": true
 }
