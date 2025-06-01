@@ -23,6 +23,18 @@ export const getPhonesThunk = createAsyncThunk(
   }
 );
 
+export const updateNfcThunk = createAsyncThunk(
+  `${PHONES_SLICE_NAME}/updateNfc`,
+  async (payload, { rejectWithValue }) => {
+    try {
+      await API.updateNfc(payload.id, { has_nfc: payload.has_nfc });
+      return payload;
+    } catch (err) {
+      return rejectWithValue({ errors: err.response.data });
+    }
+  }
+);
+
 export const deletePhoneThunk = createAsyncThunk(
   `${PHONES_SLICE_NAME}/delete`,
   async (payload, { rejectWithValue }) => {
@@ -52,6 +64,22 @@ export const phonesSlice = createSlice({
       state.isFetching = false;
     });
 
+    //update
+    builder.addCase(updateNfcThunk.pending, (state) => {
+      state.isFetching = true;
+      state.error = null;
+    });
+    builder.addCase(updateNfcThunk.fulfilled, (state, { payload }) => {
+      state.isFetching = false;
+      const index = state.phones.findIndex((p) => p.id === payload.id);
+      if (index !== -1) {
+        state.phones[index].has_nfc = payload.has_nfc;
+      }
+    });
+    builder.addCase(updateNfcThunk.rejected, (state, { payload }) => {
+      state.error = payload;
+      state.isFetching = false;
+    });
     //delete
     builder.addCase(deletePhoneThunk.pending, (state) => {
       state.isFetching = true;

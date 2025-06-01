@@ -1,13 +1,22 @@
 import { useEffect } from "react";
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import BeatLoader from "react-spinners/BeatLoader";
 import { connect } from "react-redux";
 import {
   deletePhoneThunk,
   getPhonesThunk,
+  updateNfcThunk,
 } from "../../store/slices/phonesSlice";
 import defImage from "./defaultPhoto.png";
 
-function PhonesList({ phones, isFetching, error, getPhones, deletePhone }) {
+function PhonesList({
+  phones,
+  isFetching,
+  error,
+  getPhones,
+  deletePhone,
+  updateNfc,
+}) {
   useEffect(() => {
     getPhones();
   }, []);
@@ -26,6 +35,23 @@ function PhonesList({ phones, isFetching, error, getPhones, deletePhone }) {
               alt={`${u.firstName} ${u.lastName}`}
             />
             <p>{JSON.stringify(u)}</p>
+            <p>
+              NFC:{" "}
+              {u.has_nfc ? (
+                <FaCheckCircle style={{ color: "green" }} />
+              ) : (
+                <FaTimesCircle style={{ color: "red" }} />
+              )}
+            </p>
+
+            <label>
+              <input
+                type="checkbox"
+                checked={u.has_nfc}
+                onChange={() => updateNfc({ id: u.id, has_nfc: !u.has_nfc })}
+              />
+              Toggle NFC
+            </label>
             <button onClick={() => deletePhone(u.id)}>X</button>
           </li>
         ))}
@@ -38,6 +64,7 @@ const mapStateToProps = ({ phonesData }) => phonesData;
 
 const mapDispatchToProps = (dispatch) => ({
   getPhones: () => dispatch(getPhonesThunk()),
+  updateNfc: (payload) => dispatch(updateNfcThunk(payload)),
   deletePhone: (id) => dispatch(deletePhoneThunk(id)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(PhonesList);

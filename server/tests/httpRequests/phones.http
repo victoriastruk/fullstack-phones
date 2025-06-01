@@ -25,11 +25,11 @@ GET http://localhost:5000/api/phones/123
 
 ###
 
-PATCH http://localhost:5000/api/phones/7
+PATCH http://localhost:5000/api/phones/6
 Content-Type: application/json
 
 {
-   "brand": "Apple"
+   "has_nfc": "false"
 }
 
 ### 404
