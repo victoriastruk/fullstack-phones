@@ -1,4 +1,9 @@
-GET http://localhost:5000/api/cpus/2/phones
+### 200
+GET http://localhost:5000/api/cpus/1/phones
+
+###200
+
+GET http://localhost:5000/api/cpus
 
 ### 201
 POST http://localhost:5000/api/cpus/1/phones

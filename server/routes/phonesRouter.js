@@ -7,7 +7,7 @@ const phonesRouter = Router();
 phonesRouter
   .route('/')
   .get(paginate.paginatePhones, phonesController.getPhones)
-  .post(phonesController.createPhone);
+  .post(upload.uploadPhonePhoto, phonesController.createPhone);
 
 phonesRouter
   .route('/:id')
@@ -15,6 +15,10 @@ phonesRouter
   .patch(phonesController.updatePhone)
   .delete(phonesController.deletePhone);
 
-phonesRouter.patch('/:id/images', upload.uploadPhonePhoto, phonesController.updatePhoneImage);
+phonesRouter.patch(
+  '/:id/images',
+  upload.uploadPhonePhoto,
+  phonesController.updatePhoneImage
+);
 
 module.exports = phonesRouter;

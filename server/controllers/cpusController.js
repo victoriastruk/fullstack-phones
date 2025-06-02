@@ -19,6 +19,7 @@ module.exports.getPhonesByCpu = async (req, res, next) => {
     next(err);
   }
 };
+
 module.exports.createPhoneWithCpu = async (req, res, next) => {
   try {
     const { model, brand, year, ram, screen_size, has_nfc } = req.body;
@@ -45,3 +46,17 @@ module.exports.createPhoneWithCpu = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.getCpus = async (req, res, next) => {
+  try {
+    const cpus = await Cpu.findAll({
+      raw: true,
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+    });
+
+    res.status(200).send({ data: cpus });
+  } catch (err) {
+    next(err);
+  }
+};
+

@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
 });
 
 function fileFilter(req, file, cb) {
-  const MIMETYPE_REG_EXP = /^image\/(jpeg|png|webp)$/;
+  const MIMETYPE_REG_EXP = /^image\/(jpeg|png|webp|jpg|svg)$/;
 
   cb(null, MIMETYPE_REG_EXP.test(file.mimetype));
 }

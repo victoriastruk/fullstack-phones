@@ -3,17 +3,23 @@ const { Phone } = require('../db/models');
 const createHttpError = require('http-errors');
 
 module.exports.createPhone = async (req, res, next) => {
-  const { body } = req;
+  const { body, file } = req;
 
   try {
+    if (file) {
+      body.image = file.filename;
+    }
+
     const createdPhone = await Phone.create(body);
     if (!createdPhone) {
       return next(createHttpError(404, 'Phone Not Found'));
     }
+
     const preparedPhone = _.omit(createdPhone.get(), [
       'createdAt',
       'updatedAt',
     ]);
+    
     res.status(201).send({ data: preparedPhone });
   } catch (err) {
     next(err);

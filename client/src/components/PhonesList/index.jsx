@@ -8,6 +8,7 @@ import {
   updateNfcThunk,
 } from "../../store/slices/phonesSlice";
 import defImage from "./defaultPhoto.png";
+import styles from './PhoneList.module.sass'
 
 function PhonesList({
   phones,
@@ -44,14 +45,24 @@ function PhonesList({
               )}
             </p>
 
-            <label>
+            {/* <label>
               <input
                 type="checkbox"
                 checked={u.has_nfc}
                 onChange={() => updateNfc({ id: u.id, has_nfc: !u.has_nfc })}
               />
               Toggle NFC
+            </label> */}
+
+            <label className={styles.switch}>
+              <input
+                type="checkbox"
+                checked={u.has_nfc}
+                onChange={() => updateNfc({ id: u.id, has_nfc: !u.has_nfc })}
+              />
+              <span className={styles.slider}></span>
             </label>
+
             <button onClick={() => deletePhone(u.id)}>X</button>
           </li>
         ))}
