@@ -1,4 +1,5 @@
 import { Formik, Form, Field } from "formik";
+import { PHONE_VALIDATION_SCHEMA } from "../../../utils/validate/validationSchemas";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import Input from "../Input";
@@ -49,7 +50,11 @@ function PhonesForm({ cpus, createPhone, getCpus }) {
 
   return (
     <div className={styles.container}>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validationSchema={PHONE_VALIDATION_SCHEMA}
+      >
         {(formikProps) => (
           <Form className={styles.form}>
             <Input label="Model" type="text" name="model" classes={classes} />
