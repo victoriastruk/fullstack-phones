@@ -16,7 +16,11 @@ export const PHONE_VALIDATION_SCHEMA = yup.object({
   ram: yup
     .number()
     .required("RAM is required")
-    .min(1, "RAM must be at least 1 GB"),
+    .integer("RAM must be an integer")
+    .oneOf(
+      [2, 3, 4, 6, 8, 12],
+      "RAM must be one of the allowed values: 2, 3, 4, 6, 8, 12 GB"
+    ),
 
   cpu_id: yup
     .number()
@@ -26,7 +30,7 @@ export const PHONE_VALIDATION_SCHEMA = yup.object({
   screen_size: yup
     .number()
     .required("Screen size is required")
-    .min(3.0, "Screen size must be at least 3.0 inches"),
+    .min(6.0, "Screen size must be at least 6.0 inches"),
 
   has_nfc: yup.boolean().required("NFC field is required"),
 
