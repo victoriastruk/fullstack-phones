@@ -18,7 +18,7 @@ export const getCpusThunk = createAsyncThunk(
       } = await API.getCpus();
       return data;
     } catch (err) {
-      return rejectWithValue({ errors: err.response.data });
+      return rejectWithValue(err.response?.data?.message || err.message);
     }
   }
 );

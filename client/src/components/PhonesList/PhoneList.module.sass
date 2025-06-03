@@ -1,3 +1,23 @@
+.wrapper
+  padding: 2rem
+
+.table
+  width: 100%
+  border-collapse: collapse
+  
+  th, td
+    border: 1px solid #ddd
+    padding: 0.75rem
+    text-align: center
+
+  th
+    background-color: #f3f4f6
+
+.userImage
+  width: 100px
+  height: 100px
+  object-fit: cover
+
 .switch
   position: relative
   display: inline-block
@@ -36,3 +56,23 @@
 
     &::before
       transform: translateX(22px)
+
+.deleteButton
+  background-color: #ef4444
+  color: white
+  padding: 0.5rem 1rem
+  border: none
+  border-radius: 4px
+  cursor: pointer
+
+  &:hover
+    background-color: #dc2626
+
+.errorBox
+  margin-top: 1rem
+  padding: 1rem
+  background-color: #fee2e2
+  color: #b91c1c
+  border: 1px solid #fca5a5
+  border-radius: 0.375rem
+  font-size: 0.9rem

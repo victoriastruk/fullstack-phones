@@ -18,7 +18,7 @@ export const createPhoneThunk = createAsyncThunk(
       } = await API.createPhone(payload);
       return data;
     } catch (err) {
-      return rejectWithValue({ errors: err.response.data });
+      return rejectWithValue(err.response?.data?.message || err.message);
     }
   }
 );
@@ -32,7 +32,7 @@ export const getPhonesThunk = createAsyncThunk(
       } = await API.getPhones();
       return data;
     } catch (err) {
-      return rejectWithValue({ errors: err.response.data });
+      return rejectWithValue(err.response?.data?.message || err.message);
     }
   }
 );
@@ -44,7 +44,7 @@ export const updateNfcThunk = createAsyncThunk(
       await API.updateNfc(payload.id, { has_nfc: payload.has_nfc });
       return payload;
     } catch (err) {
-      return rejectWithValue({ errors: err.response.data });
+      return rejectWithValue(err.response?.data?.message || err.message);
     }
   }
 );
@@ -56,7 +56,7 @@ export const deletePhoneThunk = createAsyncThunk(
       await API.deletePhone(payload);
       return payload;
     } catch (err) {
-      return rejectWithValue({ errors: err.response.data });
+      return rejectWithValue(err.response?.data?.message || err.message);
     }
   }
 );

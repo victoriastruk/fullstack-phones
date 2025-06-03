@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const { Phone } = require('../db/models');
+const { Phone, Cpu } = require('../db/models');
 const createHttpError = require('http-errors');
 
 module.exports.createPhone = async (req, res, next) => {
@@ -15,12 +15,25 @@ module.exports.createPhone = async (req, res, next) => {
       return next(createHttpError(404, 'Phone Not Found'));
     }
 
-    const preparedPhone = _.omit(createdPhone.get(), [
-      'createdAt',
-      'updatedAt',
-    ]);
-    
-    res.status(201).send({ data: preparedPhone });
+    const preparedPhone = await Phone.findByPk(createdPhone.id, {
+      attributes: { exclude: ['createdAt', 'updatedAt', 'cpu_id'] },
+      include: [
+        {
+          model: Cpu,
+          attributes: ['name', 'manifacturer'],
+        },
+      ],
+    });
+
+    const plainPhone = preparedPhone.get({ plain: true });
+
+    const result = {
+      ..._.omit(plainPhone, ['Cpu']),
+      name: preparedPhone.Cpu?.name || null,
+      manufacturer: preparedPhone.Cpu?.manifacturer || null,
+    };
+
+    res.status(201).send({ data: result });
   } catch (err) {
     next(err);
   }
@@ -31,15 +44,29 @@ module.exports.getPhones = async (req, res, next) => {
 
   try {
     const foundPhones = await Phone.findAll({
-      raw: true,
       attributes: {
-        exclude: ['createdAt', 'updatedAt'],
+        exclude: ['createdAt', 'updatedAt', 'cpu_id'],
       },
+      include: [
+        {
+          model: Cpu,
+          attributes: ['name', 'manifacturer'],
+        },
+      ],
       limit,
       offset,
       order: ['id'],
     });
-    res.status(200).send({ data: foundPhones });
+
+    const result = foundPhones.map((phone) => {
+      const plainPhone = phone.get({ plain: true });
+      return {
+        ..._.omit(plainPhone, ['Cpu']),
+        name: phone.Cpu?.name || null,
+        manufacturer: phone.Cpu?.manifacturer || null,
+      };
+    });
+    res.status(200).send({ data: result });
   } catch (err) {
     next(err);
   }

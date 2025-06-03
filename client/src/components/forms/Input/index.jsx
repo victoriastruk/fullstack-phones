@@ -1,5 +1,6 @@
 import { Field } from "formik";
 import classNames from "classnames";
+import styles from './Input.module.sass'
 
 function Input(props) {
   const { name, label, classes, ...restProps } = props;
@@ -12,7 +13,7 @@ function Input(props) {
         });
 
         return (
-          <label>
+          <label className={styles.label}>
             <span>{label}</span>
             <input className={inputClassNames} {...restProps} {...field} />
             {meta.error && meta.touched && (
