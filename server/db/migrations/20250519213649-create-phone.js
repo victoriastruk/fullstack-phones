@@ -29,7 +29,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         validate: {
-          min: 1,
+          min: 2,
         },
       },
       cpu_id: {
@@ -46,7 +46,7 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false,
         validate: {
-          min: 3.0,
+          min: 6.0,
         },
       },
       has_nfc: {
