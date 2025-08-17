@@ -6,7 +6,7 @@ const router = require('./routes');
 
 const app = express();
 const corsOptopns = {
-  origin: '*',
+  origin: ["https://fullstack-phones.vercel.app"],
 };
 app.use(cors(corsOptopns));
 
