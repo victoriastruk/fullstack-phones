@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({ baseURL: "http://localhost:5000/api" });
+const axiosInstance = axios.create({ baseURL: import.meta.env.VITE_API_URL + "/api"});
 
 export const getCpus = () => axiosInstance.get("/cpus");
 
