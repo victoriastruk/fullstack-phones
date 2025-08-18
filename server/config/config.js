@@ -25,7 +25,17 @@ module.exports = {
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false, 
+        rejectUnauthorized: false,
+      },
+    },
+  },
+  migration: {
+    use_env_variable: 'DIRECT_URL',
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
       },
     },
   },
