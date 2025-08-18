@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node .",
-    "dev": "nodemon -r dotenv/config .",
-    "postinstall": "sequelize db:migrate --env production && sequelize db:seed:all --env production"
+    "dev": "nodemon -r dotenv/config ."
   },
   "keywords": [],
   "author": "",
