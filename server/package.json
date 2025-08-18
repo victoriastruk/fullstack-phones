@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon -r dotenv/config ."
+    "start": "node .",
+    "dev": "nodemon -r dotenv/config .",
+    "migrate": "sequelize db:migrate --env production",
+    "seed": "sequelize db:seed:all --env production"
   },
   "keywords": [],
   "author": "",
