@@ -1,5 +1,6 @@
 const http = require('http');
 const app = require('./app');
+const db = require("./db/models");
 
 const PORT = process.env.PORT;
 const HOST = process.env.HOST || '0.0.0.0';
@@ -8,7 +9,7 @@ const httpServer = http.createServer(app);
 
 app.get("/", async (req, res) => {
   try {
-    await sequelize.authenticate();
+    await db.sequelize.authenticate();
     res.send("✅ Database connected successfully");
   } catch (error) {
     res.status(500).send("❌ Database Error: " + error.message);
